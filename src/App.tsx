@@ -41,6 +41,9 @@ function App() {
         const userIdentity = "IXAyomy9AAaX9sJi154vvqE";
 
         const accessToken =
+            "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY3QiOnsic3ViIjoiQTZMVkRydm5CVDVTUksxWFhjenBtdkUiLCJpc3MiOiJodHRwczovL2F1dGgub2FzaXNsYWJzLmNvbSJ9LCJhdWQiOlsiaHR0cHM6Ly9hcGkub2FzaXNsYWJzLmNvbS9wYXJjZWwiXSwiY2xpZW50X2lkIjoiQ0x2N0tQTXY0VFJUWFB6ZVFCZm1XWWUiLCJleHAiOjE2NDgyNDQ0MjUsImlhdCI6MTY0ODI0MDgyNywiaXNzIjoiaHR0cHM6Ly9hdXRoLm9hc2lzbGFicy5jb20iLCJqdGkiOiJkZGIyYTg0Zi1mM2I0LTQyOGQtYWQzNC0xOTZiYmE5YzBmMGYiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIHBhcmNlbC5wdWJsaWMgcGFyY2VsLmZ1bGwiLCJzdWIiOiJJWEF5b215OUFBYVg5c0ppMTU0dnZxRSJ9.43RiqOjXl3RwY6tTPsoENOYEbrB0mr_T-P7kmgY79IaxW-HUOSI2PGnAVuMSxAxQGX6YReiotmg1XHMboib5Cw";
+
+        const accessTokenExpired =
             "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY3QiOnsic3ViIjoiQTZMVkRydm5CVDVTUksxWFhjenBtdkUiLCJpc3MiOiJodHRwczovL2F1dGgub2FzaXNsYWJzLmNvbSJ9LCJhdWQiOlsiaHR0cHM6Ly9hcGkub2FzaXNsYWJzLmNvbS9wYXJjZWwiXSwiY2xpZW50X2lkIjoiQ0x2N0tQTXY0VFJUWFB6ZVFCZm1XWWUiLCJleHAiOjE2NDgxMzQyNjMsImlhdCI6MTY0ODEzMDY2MywiaXNzIjoiaHR0cHM6Ly9hdXRoLm9hc2lzbGFicy5jb20iLCJqdGkiOiJlYzA2ZGI3ZC1kMjI4LTQ4YWYtOWEzMy1mYjRjNzc0OTE4MDIiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIHBhcmNlbC5wdWJsaWMgcGFyY2VsLmZ1bGwiLCJzdWIiOiJJWEF5b215OUFBYVg5c0ppMTU0dnZxRSJ9.7ERpaSyOatY3MP2BI0Dy4DENODWxpiJCR6DZExu1r9LmTfL-PNBH8M3JDCxEGz1JhP3wg971VWcqxMnaR5Pwew";
 
         await fetch("http://localhost:3001/oasis/upload-data", {
@@ -48,9 +51,12 @@ function App() {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
+                Authorization: `Bearer ${accessToken}`,
             },
             body: JSON.stringify({ accessToken, userIdentity, data }),
-        });
+        })
+            .then((r) => console.log(r))
+            .catch((e) => console.log(e));
     };
 
     const login = async () => {
@@ -89,19 +95,19 @@ function App() {
                 </LocalizationProvider>
                 <FormControl>
                     <InputLabel htmlFor="street">Street</InputLabel>
-                    <Input {...register("address.street")} id="street" aria-describedby="street" />
+                    <Input {...register("street")} id="street" aria-describedby="street" />
                 </FormControl>
                 <FormControl>
                     <InputLabel htmlFor="postalcode">Postalcode</InputLabel>
-                    <Input {...register("address.postalcode")} id="postalcode" aria-describedby="postalcode" />
+                    <Input {...register("postalcode")} id="postalcode" aria-describedby="postalcode" />
                 </FormControl>
                 <FormControl>
                     <InputLabel htmlFor="state">State</InputLabel>
-                    <Input {...register("address.state")} id="state" aria-describedby="state" />
+                    <Input {...register("state")} id="state" aria-describedby="state" />
                 </FormControl>
                 <FormControl>
                     <InputLabel htmlFor="country">Country</InputLabel>
-                    <Input {...register("address.country")} id="country" aria-describedby="country" />
+                    <Input {...register("country")} id="country" aria-describedby="country" />
                 </FormControl>
                 <Button type="submit">Click me!</Button>
             </Wrapper>
